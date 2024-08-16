@@ -1,0 +1,201 @@
+body {
+    font-family: 'Century Gothic', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #003366;
+    padding-top: 50px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: white;
+    position: absolute;
+    top: 0;
+    width: 90%;
+    flex-direction: column;
+}
+
+.user-info i {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.user-info #username {
+    flex-grow: 1;
+}
+
+.logout-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    margin-top: 15%;
+    margin-left: 80%;
+}
+
+.logout-button:hover {
+    color: #cc0000bb;
+}
+
+.sidebar .dropdown {
+    position: relative;
+    margin-top: 100px;
+}
+
+.sidebar .dropdown .dropdown-toggle {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.sidebar .dropdown .dropdown-toggle i {
+    margin-left: 10px;
+}
+
+.sidebar .dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #003366;
+    min-width: 250px;
+    padding-top: 10px;
+}
+
+.sidebar .dropdown .dropdown-menu a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.sidebar .dropdown .dropdown-menu a:hover {
+    background-color: #cc0000bb;
+}
+
+.sidebar .dropdown:hover .dropdown-toggle {
+    background-color: #CC0000;
+}
+
+.sidebar .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.title {
+    font-size: 2em;
+    color: #003366;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.reservation-form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.input-date, .input-time {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #cc0000bb;
+}
+
+#car-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.car-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.car-image {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.car-info {
+    margin-top: 10px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reserve-button {
+    padding: 10px 15px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 0;
+    align-self: center;
+}
+
+.reserve-button:hover {
+    background-color: #cc0000bb;
+}
