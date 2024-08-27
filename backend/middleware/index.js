@@ -7,5 +7,5 @@ module.exports = (app) => {
 
     // Servir archivos estáticos
     app.use(express.static(path.join(__dirname, '../../frontend/public')));
-    app.use('/img', express.static(path.join(__dirname, '../../frontend/img')));
+    app.use('/img', express.static(path.join(__dirname, '../../frontend/public/img')));
 };

@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1,
+        "nombre": "Opel Corsa",
+        "imagen": "corsa.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Nissan Juke",
+        "imagen": "juke.jpg"
+    }
+    
+]
