@@ -1,40 +1,24 @@
+require('./config/globals'); // Esto hará que todo lo definido en globals.js sea global
+
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const path = require('path');
+const applyMiddleware = require('./middleware');
+const routes = require('./routes');
+const { connectToDatabase } = require('./db/db');
 
 const app = express();
-const port = 3000;
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// Aplicar los middleware
+applyMiddleware(app);
 
-const carRoutes = require('./routes/carRoutes');
-const loginRoutes = require('./routes/loginRoutes');
+// Conectar a la base de datos
+connectToDatabase().then(() => {
+    // Configurar las rutas
+    app.use('/api', routes);
 
-app.use('/api/cars', carRoutes);
-app.use('/api', loginRoutes);
-
-// Servir archivos estáticos desde la carpeta frontend/public
-app.use(express.static(path.join(__dirname, '../frontend/public')));
-
-// Ruta para index.html
-app.get('/index.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/public/index.html'));
-});
-
-app.get('/api/check-db-connection', (req, res) => {
-    const sql = require('./db');
-    sql.connect().then(pool => {
-        if (pool.connected) {
-            res.json({ message: 'Conexión a la base de datos exitosa' });
-        }
-    }).catch(err => {
-        res.status(500).json({ message: 'Error al conectar a la base de datos', error: err });
+    // Iniciar el servidor
+    app.listen(3000, () => {
+        console.log('Server is running on port 3000');
     });
-});
-
-app.listen(port, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${port}`);
+}).catch(err => {
+    console.error('Failed to start the server due to database connection error:', err);
 });

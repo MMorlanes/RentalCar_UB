@@ -145,3 +145,16 @@ body {
     height: auto;
     margin: 20px auto 0; /* Añadir espacio arriba de la imagen */
 }
+/* Estilos previos... */
+
+.input-error {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Otros estilos... */

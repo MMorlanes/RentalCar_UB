@@ -11,11 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mssql": "^11.0.1"
+    "mssql": "^11.0.1",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
   },
-  "description": ""
+  "description": "- **Inicializar un repositorio en un proyecto existente:**\r     ```bash\r     git init\r     ```"
 }
