@@ -1,6 +1,16 @@
 como ves el proyecto esta ya como a la mitad casi finalizado por lo que dejare tareas y cosas que tendras que realizar tu por tu cuenta buscando en internet 
 o con chatgpt
 
+NOTA: PARA LA REALIZACION DE LAS TAREAS CREATE UNA RAMA NUEVA ESTO LO PUEDES MIRAR EN EL manualGIT aqui tendras los pasos a seguir y un manual basico para desenvolverte
+en git
+los pasos a seguir son asi en resumidas
+git branch -a 
+git checkout mimikaDEV
+git pull
+git branch mmorlanesDev
+
+y listo quizas en la parte escrita me equivoque pero la secuencia es asi esto es para que aprendas a usar git y empieces a usarlo
+
 
 -- en el index ya se visualizan los coches que existen en en la base de datos y que tienes en la carpeta img, lo que tendras que hacer ahora
 es crear una funcion que cuando el usuario introduzca las fechas en la cual quiere reservar el coche solo aparezca el coche disponible ya no todos
