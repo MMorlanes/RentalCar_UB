@@ -41,22 +41,22 @@ exports.updateCarStatus = async () => {
     }
 };
 
-exports.reserveCar = async (carId, startDate, endDate, userId) => {
+exports.reserveCar = async (carId, startDate, endDate, userId, comments) => {
     const getIdrQuery = `
         SELECT idr 
-        FROM UbCoches 
-        WHERE idCoches = @carId;
+        FROM UbRecursos 
+        WHERE idr = @carId;  // Cambiado de 'idCoches' a 'idr'
     `;
 
     const insertQuery = `
-        UPDATE UbCoches
-        SET idr = @idr, idus = @userId, fecha = @startDate, fechafin = @endDate
-        WHERE idCoches = @carId;
+        UPDATE UbRecursos
+        SET idr = @idr, usuario = @userId, fstatus = @startDate, comentarios = @comments, status = 'ocupado'
+        WHERE idr = @carId;  // Cambiado de 'idCoches' a 'idr'
     `;
 
     const updateQuery = `
         UPDATE UbRecursos
-        SET status = 'ocupado', fstatus = GETDATE()
+        SET status = 'ocupado', fstatus = GETDATE(), usuario = @userId
         WHERE idr = @idr;
     `;
 
@@ -66,6 +66,7 @@ exports.reserveCar = async (carId, startDate, endDate, userId) => {
 
         await transaction.begin();
 
+        // Obtén el 'idr' del coche
         const result = await transaction.request()
             .input('carId', sql.Int, carId)
             .query(getIdrQuery);
@@ -76,17 +77,22 @@ exports.reserveCar = async (carId, startDate, endDate, userId) => {
 
         const idr = result.recordset[0].idr;
 
+        // Mostrar los datos antes de realizar las consultas
+        console.log('Reservando coche con ID:', carId);
+        console.log('IDR:', idr);
+        console.log('User ID:', userId);
+        console.log('Start Date:', startDate);
+        console.log('End Date:', endDate);
+        console.log('Comments:', comments);
+
+        // Ejecuta la consulta de actualización para reservar el coche
         await transaction.request()
             .input('idr', sql.Int, idr)
             .input('userId', sql.Int, userId)
             .input('startDate', sql.DateTime, new Date(startDate))
             .input('endDate', sql.DateTime, new Date(endDate))
-            .input('carId', sql.Int, carId)
+            .input('comments', sql.NVarChar, comments)
             .query(insertQuery);
-
-        await transaction.request()
-            .input('idr', sql.Int, idr)
-            .query(updateQuery);
 
         await transaction.commit();
     } catch (err) {

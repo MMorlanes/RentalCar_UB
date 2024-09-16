@@ -69,8 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }), // Asegúrate de que los datos se envían como JSON
+            body: JSON.stringify({ email, password }), // Enviar los datos como JSON
         });
+    
+        const data = await response.json();
+    
+        if (response.status === 200) {
+            // Guardar el userId en localStorage para utilizarlo en futuras solicitudes
+            localStorage.setItem('userId', data.userId);
+        }
+    
         return response;
     }
+    
 });

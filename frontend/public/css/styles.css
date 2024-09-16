@@ -119,35 +119,69 @@ main {
 }
 
 .reservation-form {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     margin-bottom: 20px;
 }
 
-.input-date, .input-time {
+.input-date, .input-time, .input-comment {
+    width: 100%;
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-right: 10px;
+}
+
+.input-comment {
+    grid-column: 1 / 3; /* Para que ocupe el ancho de las dos columnas */
+    height: 120px; /* Ajusta la altura del campo de comentarios */
+    resize: none; /* Evita que se redimensione */
 }
 
 .search-button {
-    padding: 10px 20px;
-    font-size: 1em;
+    grid-column: 1 / 3; /* Para que el botón ocupe todo el ancho disponible */
+    padding: 15px;
+    font-size: 1.1em;
     background-color: #003366;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
 }
 
 .search-button:hover {
     background-color: #cc0000bb;
 }
+
+.search-button, .reserve-button {
+    grid-column: 1 / 3; /* Para que el botón ocupe todo el ancho disponible */
+    padding: 15px;
+    font-size: 1.1em;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.search-button:hover, .reserve-button:hover {
+    background-color: #cc0000bb;
+}
+
+/* Para que ambos botones ocupen su propio espacio y se vean uno debajo del otro */
+.reserve-button {
+    margin-top: 10px;
+}
+
+
+
+
+
 
 #car-list {
     display: flex;
@@ -183,6 +217,21 @@ main {
     justify-content: center;
     align-items: center;
 }
+/* Efecto cuando pasas el mouse por encima del coche */
+.car-card:hover {
+    border-color: #003366; /* Cambia el color del borde */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Añade un poco de sombra */
+    cursor: pointer;
+    background-color: #f0f0f5; /* Cambia el fondo */
+}
+
+/* Efecto cuando haces clic en un coche */
+.car-card.selected {
+    border: 2px solid #003366;
+    background-color: #e0f7fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 
 .reserve-button {
     padding: 10px 15px;
@@ -199,3 +248,16 @@ main {
 .reserve-button:hover {
     background-color: #cc0000bb;
 }
+
+
+.input-comment {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; /* Esto evita que se pueda cambiar el tamaño del campo de comentario */
+}
+

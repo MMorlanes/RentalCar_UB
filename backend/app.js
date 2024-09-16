@@ -7,12 +7,18 @@ const { connectToDatabase } = require('./db/db');
 
 const app = express();
 
-// Aplicar los middleware
+// Middleware para registrar todas las solicitudes entrantes
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`); // Muestra el método HTTP y la URL
+    next();
+});
+
+// Aplicar los middleware (body-parser, cors, etc.)
 applyMiddleware(app);
 
 // Conectar a la base de datos
 connectToDatabase().then(() => {
-    // Configurar las rutas
+    // Configurar las rutas con el prefijo '/api'
     app.use('/api', routes);
 
     // Iniciar el servidor
