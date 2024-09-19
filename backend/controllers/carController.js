@@ -15,38 +15,22 @@ exports.getAvailableCars = async (req, res) => {
 
 exports.reserveCar = async (req, res) => {
     const carId = req.params.id;
-    const { startDate, endDate, comments } = req.body;
-    const userEmail = req.body.email;  // Asegúrate de que el correo electrónico del usuario autenticado sea parte de la solicitud
+    const { startDate, endDate, comments, PkUserWeb } = req.body;  // Usamos PkUserWeb
 
-    // Formatear las fechas para SQL
+    // Formatear las fechas para SQL Server
     const formattedStartDate = new Date(startDate).toISOString().slice(0, 19).replace('T', ' ');
     const formattedEndDate = new Date(endDate).toISOString().slice(0, 19).replace('T', ' ');
 
     try {
-        // Obtener el userId desde la tabla UbUserweb basado en el correo electrónico
-        const pool = await sql.globalConnection;
-        const userQuery = `SELECT id FROM UbUserweb WHERE mail = @userEmail`;
-
-        const userResult = await pool.request()
-            .input('userEmail', sql.NVarChar, userEmail)
-            .query(userQuery);
-
-        if (userResult.recordset.length === 0) {
-            return res.status(404).json({ message: 'No se encontró el usuario con ese correo electrónico.' });
-        }
-
-        const userId = userResult.recordset[0].id;
-
-        // Mostrar en consola lo que se está recibiendo
         console.log('Reserva recibida:');
         console.log('Car ID:', carId);
         console.log('Start Date:', formattedStartDate);
         console.log('End Date:', formattedEndDate);
         console.log('Comments:', comments);
-        console.log('User ID:', userId);
+        console.log('PkUserWeb:', PkUserWeb);  // Mostramos el valor de PkUserWeb
 
-        // Proceder a la reserva
-        await carModel.reserveCar(carId, formattedStartDate, formattedEndDate, userId, comments);
+        // Proceder a la reserva usando PkUserWeb
+        await carModel.reserveCar(carId, formattedStartDate, formattedEndDate, PkUserWeb, comments);
         res.json({ message: 'Coche reservado exitosamente' });
     } catch (error) {
         console.error('Error al realizar la reserva:', error.message);

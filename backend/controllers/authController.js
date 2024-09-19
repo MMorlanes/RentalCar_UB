@@ -15,7 +15,8 @@ exports.login = async (req, res) => {
         }
 
         if (user.password === password) {
-            return res.status(200).json({ message: 'Login exitoso' });
+            // Enviar el PkUserWeb al frontend
+            return res.status(200).json({ message: 'Login exitoso', PkUserWeb: user.PkUserWeb });
         } else {
             return res.status(401).json({ message: 'Correo o contraseña incorrectos' });
         }

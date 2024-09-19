@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Botón de reserva de coche
 document.querySelector('.reserve-button').addEventListener('click', async () => {
-    const carCardSelected = document.querySelector('.car-card.selected'); // Coche seleccionado
+    const carCardSelected = document.querySelector('.car-card.selected');  // Coche seleccionado
     if (!carCardSelected) {
         alert('Por favor, selecciona un coche');
         return;
@@ -95,6 +95,13 @@ document.querySelector('.reserve-button').addEventListener('click', async () => 
     const returnDate = document.getElementById('return-date').value;
     const returnTime = document.getElementById('return-time').value;
     const comments = document.getElementById('comments').value;
+    const PkUserWeb = localStorage.getItem('PkUserWeb');  // Recuperamos PkUserWeb
+
+    if (!PkUserWeb) {
+        alert('Usuario no autenticado. Por favor, inicia sesión.');
+        window.location.href = '/login.html';
+        return;
+    }
 
     // Combina las fechas y horas para el backend
     const startDate = `${pickupDate} ${pickupTime}`;
@@ -106,14 +113,13 @@ document.querySelector('.reserve-button').addEventListener('click', async () => 
     console.log('Start Date:', startDate);
     console.log('End Date:', endDate);
     console.log('Comments:', comments);
+    console.log('PkUserWeb:', PkUserWeb);
 
     // Envía los datos al backend
     const response = await fetch(`/api/cars/reserve/${carId}`, {
-
-
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ startDate, endDate, comments })
+        body: JSON.stringify({ startDate, endDate, comments, PkUserWeb })  // PkUserWeb es enviado al backend
     });
 
     const result = await response.json();
